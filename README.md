@@ -18,3 +18,18 @@ Repository
 ### Aplikacja standalone
 Service
 Repository
+
+REST
+* HTTP
+* JSON
+* CRUD na HTTP
+    * hierarchiczne adresy
+    * Read - GET --> \books
+    * Read on - GET -->\books\{id}
+    * Delete - DELETE --> \books\{id}
+    * Create - POST --> \books
+    * Update (replace) - PUT --> \books\{id}
+    * Update (partial) - PATCH --> \books\{id}
+    
+
+    
