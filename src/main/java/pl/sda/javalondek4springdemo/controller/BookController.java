@@ -2,10 +2,7 @@ package pl.sda.javalondek4springdemo.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.sda.javalondek4springdemo.model.Book;
 import pl.sda.javalondek4springdemo.service.BookService;
 import pl.sda.javalondek4springdemo.service.MyService;
@@ -36,5 +33,12 @@ public class BookController {
     public Book getBookById (@PathVariable("id") Long id){
         logger.info("find book by Id: [{}]", id);
         return bookService.findBookById(id);
+    }
+
+    @PostMapping
+    public Book addBook(@RequestBody Book toSave) {
+        logger.info("adding book: [{}]", toSave);
+
+       return bookService.saveBook(toSave);
     }
 }

@@ -31,7 +31,7 @@ public class BookService {
     }
 
     public Book findBookById(Long id) {
-        Objects.requireNonNull(id, "id parameter mustn't be null!")
+        Objects.requireNonNull(id, "id parameter mustn't be null!");
         var result = bookRepository.findAllBooks()
                 .stream()
                 .filter(book -> book.getId().equals(id))
@@ -40,5 +40,21 @@ public class BookService {
 
         logger.info("book found for id: [{}] is: [{}]", id, result);
         return null;
+    }
+
+    public Book saveBook(Book toSave) {
+        //find max id
+        //add book with id
+        //return book with id (max id +1)
+       Long currentMaxId = bookRepository.findAllBooks()
+                .stream()
+                .mapToLong(value -> value.getId())
+                .max()
+                .orElse(1);
+        toSave.setId(currentMaxId + 1);
+        bookRepository.findAllBooks().add(toSave);
+
+        logger.info("saved book: [{}]", toSave);
+        return toSave;
     }
 }
