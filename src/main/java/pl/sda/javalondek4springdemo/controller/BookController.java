@@ -7,6 +7,7 @@ import pl.sda.javalondek4springdemo.model.Book;
 import pl.sda.javalondek4springdemo.service.BookService;
 import pl.sda.javalondek4springdemo.service.MyService;
 
+import javax.persistence.PostUpdate;
 import java.util.List;
 
 @RestController
@@ -30,7 +31,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public Book getBookById (@PathVariable("id") Long id){
+    public Book getBookById(@PathVariable("id") Long id) {
         logger.info("find book by Id: [{}]", id);
         return bookService.findBookById(id);
     }
@@ -39,13 +40,28 @@ public class BookController {
     public Book addBook(@RequestBody Book toSave) {
         logger.info("adding book: [{}]", toSave);
 
-       return bookService.saveBook(toSave);
+        return bookService.saveBook(toSave);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteBookById(@PathVariable("id") Long id){
+    public void deleteBookById(@PathVariable("id") Long id) {
         logger.info("deleting book by id: [{}]", id);
         bookService.deleteBookById(id);
+    }
+
+    //update - replace
+    @PutMapping
+    public Book replaceBook(@RequestBody Book toReplace) {
+        logger.info("replacing book with new one: [{}]", toReplace);
+        return bookService.replaceBook(toReplace);
+    }
+
+    //update - partial
+    @PatchMapping
+    public Book updateBook (@RequestBody Book toUpdate) {
+        logger.info("updating Book with new attributes: [{}]", toUpdate);
+
+        return bookService.updateBookWithAttributes(toUpdate);
     }
 
 }
