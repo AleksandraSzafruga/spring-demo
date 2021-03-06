@@ -50,18 +50,18 @@ public class BookController {
     }
 
     //update - replace
-    @PutMapping
-    public Book replaceBook(@RequestBody Book toReplace) {
+    @PutMapping("/{id}")
+    public Book replaceBook(@PathVariable ("id") Long id, @RequestBody Book toReplace) {
         logger.info("replacing book with new one: [{}]", toReplace);
-        return bookService.replaceBook(toReplace);
+        return bookService.replaceBook(id, toReplace);
     }
 
     //update - partial
-    @PatchMapping
-    public Book updateBook (@RequestBody Book toUpdate) {
+    @PatchMapping("/{id}")
+    public Book updateBook (@PathVariable ("id") Long id, @RequestBody Book toUpdate) {
         logger.info("updating Book with new attributes: [{}]", toUpdate);
 
-        return bookService.updateBookWithAttributes(toUpdate);
+        return bookService.updateBookWithAttributes(id, toUpdate);
     }
 
 }

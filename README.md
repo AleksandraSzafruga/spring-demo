@@ -60,5 +60,11 @@ REST
     * Update (replace) - PUT --> \books\{id}
     * Update (partial) - PATCH --> \books\{id}
     
-
-    
+* Exemple API
+  * GET --> \items
+  * GET --> \items\{id}
+  * GET --> \categories\{id}
+  
+  * GET --> \categories
+  * GET --> \categories\{id}
+  * GET --> \categories\{id}\items
