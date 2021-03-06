@@ -41,4 +41,11 @@ public class BookController {
 
        return bookService.saveBook(toSave);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteBookById(@PathVariable("id") Long id){
+        logger.info("deleting book by id: [{}]", id);
+        bookService.deleteBookById(id);
+    }
+
 }
