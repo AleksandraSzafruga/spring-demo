@@ -37,8 +37,8 @@ public class BookService {
         return null;
     }
 
-    private Book findBookByIdFromRepository (Long id) {
-       return bookRepository.findAllBooks()
+    private Book findBookByIdFromRepository(Long id) {
+        return bookRepository.findAllBooks()
                 .stream()
                 .filter(book -> book.getId().equals(id))
                 .findFirst()
@@ -66,6 +66,7 @@ public class BookService {
         logger.info("trying to delete book with id: [{}], result {[]}", id, result);
         return result;
     }
+
     //transactional - musi wykonać się w całośći
     public Book replaceBook(Long id, Book toReplace) {
         Book book = findBookByIdFromRepository(id);
@@ -81,10 +82,11 @@ public class BookService {
     public Book updateBookWithAttributes(Long id, Book toUpdate) {
         Book book = findBookByIdFromRepository(id);
 
-        if(nonNull (toUpdate.getAuthor())){
+        if (nonNull(toUpdate.getAuthor())) {
             book.setAuthor(toUpdate.getAuthor());
         }
-        if (nonNull(toUpdate.getTitle())){
+
+        if (nonNull(toUpdate.getTitle())) {
             book.setTitle(toUpdate.getTitle());
         }
         logger.info("updated book: [{}], with changes to apply: [{}]", book, toUpdate);
