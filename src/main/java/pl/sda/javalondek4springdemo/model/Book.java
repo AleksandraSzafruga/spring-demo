@@ -1,21 +1,21 @@
 package pl.sda.javalondek4springdemo.model;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Book {
 
     private Long id;
 
-    @JsonProperty("autor")
-    private String author;
+    private String name;
 
-    @JsonProperty("tytuł")
+    private String surname;
+
     private String title;
 
-    public Book(Long id, String author, String title) {
+    public Book(Long id, String name, String surname, String title) {
         this.id = id;
-        this.author = author;
+        this.name = name;
+        this.surname = surname;
         this.title = title;
     }
 
@@ -30,14 +30,6 @@ public class Book {
         this.id = id;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -46,12 +38,29 @@ public class Book {
         this.title = title;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
-            "id=" + id +
-            ", author='" + author + '\'' +
-            ", title='" + title + '\'' +
-            '}';
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", title='" + title + '\'' +
+                '}';
     }
 }
