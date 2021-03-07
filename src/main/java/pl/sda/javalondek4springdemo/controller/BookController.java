@@ -47,21 +47,26 @@ public class BookController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteBookById(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteBookById(@PathVariable("id") Long id) {
         logger.info("deleting book by id: [{}]", id);
-        bookService.deleteBookById(id);
+        boolean delete = bookService.deleteBookById(id);
+        ResponseEntity<Void> result = ResponseEntity.notFound().build();
+        if (delete) {
+            return ResponseEntity.noContent().build();
+        }
+        return result;
     }
 
     //update - replace
     @PutMapping("/{id}")
-    public Book replaceBook(@PathVariable ("id") Long id, @RequestBody Book toReplace) {
+    public Book replaceBook(@PathVariable("id") Long id, @RequestBody Book toReplace) {
         logger.info("replacing book with new one: [{}]", toReplace);
         return bookService.replaceBook(id, toReplace);
     }
 
     //update - partial
     @PatchMapping("/{id}")
-    public Book updateBook (@PathVariable ("id") Long id, @RequestBody Book toUpdate) {
+    public Book updateBook(@PathVariable("id") Long id, @RequestBody Book toUpdate) {
         logger.info("updating Book with new attributes: [{}]", toUpdate);
 
         return bookService.updateBookWithAttributes(id, toUpdate);
