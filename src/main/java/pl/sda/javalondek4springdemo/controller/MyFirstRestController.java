@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pl.sda.javalondek4springdemo.exception.BookNotFoundException;
 import pl.sda.javalondek4springdemo.service.MyService;
 
 @RestController
@@ -50,5 +51,10 @@ public class MyFirstRestController {
 
         logger.info("input param: [{}], result: [{}]", name, result);
         return result;
+    }
+    @GetMapping("/throw-exception")
+    public void throwException(){
+        logger.info("throwing new exception from controller");
+        throw new BookNotFoundException("no message");
     }
 }
