@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pl.sda.javalondek4springdemo.exception.BookNotFoundException;
 import pl.sda.javalondek4springdemo.service.MyService;
 
 @RestController
@@ -17,13 +18,14 @@ public class MyFirstRestController {
     private final MyService myService;
 
     public MyFirstRestController() {
-        logger.info("my service will be null");
+        logger.info("my service will be null:(");
         myService = null;
     }
-    @Autowired // choose one way to create Spring Bean
-    public MyFirstRestController(MyService myService) {
 
-        logger.info("my service initialized with correct value");
+    @Autowired // choose one way to create Spring Bean!!!
+    // if only one way of object creation exists @Autowired is not necessary
+    public MyFirstRestController(MyService myService) {
+        logger.info("my service initialized with correct value:)");
         this.myService = myService;
     }
 
@@ -50,5 +52,12 @@ public class MyFirstRestController {
 
         logger.info("input param: [{}], result: [{}]", name, result);
         return result;
+    }
+
+    @GetMapping("/throw-exception")
+    public void throwException() {
+        logger.info("throwing exception from controller...");
+
+        throw new BookNotFoundException("no message");
     }
 }
