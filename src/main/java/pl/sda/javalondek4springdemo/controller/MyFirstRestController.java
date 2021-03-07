@@ -18,13 +18,14 @@ public class MyFirstRestController {
     private final MyService myService;
 
     public MyFirstRestController() {
-        logger.info("my service will be null");
+        logger.info("my service will be null:(");
         myService = null;
     }
-    @Autowired // choose one way to create Spring Bean
-    public MyFirstRestController(MyService myService) {
 
-        logger.info("my service initialized with correct value");
+    @Autowired // choose one way to create Spring Bean!!!
+    // if only one way of object creation exists @Autowired is not necessary
+    public MyFirstRestController(MyService myService) {
+        logger.info("my service initialized with correct value:)");
         this.myService = myService;
     }
 
@@ -52,9 +53,11 @@ public class MyFirstRestController {
         logger.info("input param: [{}], result: [{}]", name, result);
         return result;
     }
+
     @GetMapping("/throw-exception")
-    public void throwException(){
-        logger.info("throwing new exception from controller");
+    public void throwException() {
+        logger.info("throwing exception from controller...");
+
         throw new BookNotFoundException("no message");
     }
 }

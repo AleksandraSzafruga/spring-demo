@@ -20,14 +20,16 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(BookNotFoundException.class)
     public ResponseEntity<ExceptionResponse> handleBookNotFoundException(Exception exception, HttpServletRequest request) {
-        logger.warn(" generic exception handler for some unexpected exception has occurred :)", exception);
+        logger.warn("generic exception handler for some unexpected exception:)", exception);
+
+
         return ResponseEntity.badRequest().body(
-                new ExceptionResponse(LocalDateTime.now(Clock.systemUTC()),
-                        HttpStatus.BAD_REQUEST.value(),
-                        exception.getClass().getSimpleName(),
-                        exception.getMessage(),
-                        request.getServletPath())
+            new ExceptionResponse(LocalDateTime.now(Clock.systemUTC()),
+                HttpStatus.BAD_REQUEST.value(),
+                exception.getClass().getSimpleName(),
+                exception.getMessage(),
+                request.getServletPath()
+            )
         );
     }
-
 }

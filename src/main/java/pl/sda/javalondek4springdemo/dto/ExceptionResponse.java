@@ -4,22 +4,26 @@ import java.time.LocalDateTime;
 
 public final class ExceptionResponse {
 
-    private LocalDateTime timeStamp;
+    private LocalDateTime timestamp;
+
     private int responseStatus;
+
     private String error;
+
     private String message;
+
     private String path;
 
-    public ExceptionResponse(LocalDateTime timeStamp, int responseStatus, String error, String message, String path) {
-        this.timeStamp = timeStamp;
+    public ExceptionResponse(LocalDateTime timestamp, int responseStatus, String error, String message, String path) {
+        this.timestamp = timestamp;
         this.responseStatus = responseStatus;
         this.error = error;
         this.message = message;
         this.path = path;
     }
 
-    public LocalDateTime getTimeStamp() {
-        return timeStamp;
+    public LocalDateTime getTimestamp() {
+        return timestamp;
     }
 
     public int getResponseStatus() {
@@ -41,11 +45,11 @@ public final class ExceptionResponse {
     @Override
     public String toString() {
         return "ExceptionResponse{" +
-                "timeStamp=" + timeStamp +
-                ", responseStatus=" + responseStatus +
-                ", error='" + error + '\'' +
-                ", message='" + message + '\'' +
-                ", path='" + path + '\'' +
-                '}';
+            "timestamp=" + timestamp +
+            ", responseStatus=" + responseStatus +
+            ", error='" + error + '\'' +
+            ", message='" + message + '\'' +
+            ", path='" + path + '\'' +
+            '}';
     }
 }
