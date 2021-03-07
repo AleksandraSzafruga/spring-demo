@@ -2,15 +2,23 @@ package pl.sda.javalondek4springdemo.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.sda.javalondek4springdemo.dto.ExceptionResponse;
+import pl.sda.javalondek4springdemo.exception.BookNotFoundException;
 import pl.sda.javalondek4springdemo.model.Book;
 import pl.sda.javalondek4springdemo.service.BookService;
 import pl.sda.javalondek4springdemo.service.MyService;
 
 import javax.persistence.PostUpdate;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
+import java.time.Clock;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/books")
@@ -70,6 +78,18 @@ public class BookController {
         logger.info("updating Book with new attributes: [{}]", toUpdate);
 
         return bookService.updateBookWithAttributes(id, toUpdate);
+    }
+
+    @ExceptionHandler(BookNotFoundException.class)
+    public ResponseEntity<ExceptionResponse> handleBookNotFoundException(Exception exception, HttpServletRequest request) {
+        logger.warn("some unexpected exception has occurred :)", exception);
+        return ResponseEntity.badRequest().body(
+                new ExceptionResponse(LocalDateTime.now(Clock.systemUTC()),
+                        HttpStatus.BAD_REQUEST.value(),
+                        exception.getClass().getName(),
+                        exception.getMessage(),
+                        request.getServletPath())
+        );
     }
 
 }
