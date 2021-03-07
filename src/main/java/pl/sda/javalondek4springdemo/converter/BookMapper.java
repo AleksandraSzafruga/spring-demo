@@ -1,12 +1,17 @@
 package pl.sda.javalondek4springdemo.converter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import pl.sda.javalondek4springdemo.dto.BookDto;
 import pl.sda.javalondek4springdemo.model.Book;
 import static java.util.Objects.nonNull;
+
+@Component
 public class BookMapper implements Mapper<Book, BookDto> {
+
     private static final String space = " ";
     private static final Logger logger = LoggerFactory.getLogger(BookMapper.class);
+
     @Override
     public BookDto fromEntityToDto(Book entity) {
         var result = new BookDto(entity.getId(), entity.getName() + space + entity.getSurname(), entity.getTitle());
@@ -27,7 +32,7 @@ public class BookMapper implements Mapper<Book, BookDto> {
             surname = authorNameAndSurname.substring(separatorIndex + 1);
         }
         var result = new Book(dto.getId(), name, surname, dto.getTitle());
-        logger.debug("converting from dto: [{}] to enity: [{}]", dto, result);
+        logger.debug("converting from dto: [{}] to entity: [{}]", dto, result);
         return result;
     }
 }
