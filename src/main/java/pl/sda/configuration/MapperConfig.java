@@ -8,7 +8,8 @@ import pl.sda.javalondek4springdemo.converter.BookMapper;
 public class MapperConfig {
 
     @Bean
-    public BookMapper bookMapper() {
+    public BookMapper BookMapper(){
         return new BookMapper();
     }
+
 }

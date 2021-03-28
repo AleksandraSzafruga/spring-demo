@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.sda.javalondek4springdemo.model.Book;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -20,9 +21,10 @@ public class BookRepository {
     }
 
     public List<Book> findAllBooks() {
-//        var result = new ArrayList<Book>();
-//        bookCrudRepository.findAll()
-//                .forEach(book -> result.add(book));
+
+        // var result = new ArrayList<Book>();
+        // bookCrudRepository.findAll()
+        //       .forEach(book -> result.add(book));
 
         var result = bookCrudRepository.findAllBooks();
         logger.info("number of found books: [{}]", result.size());
@@ -32,11 +34,11 @@ public class BookRepository {
 
     @Transactional
     public boolean deleteBookWithId(Long id) {
-        boolean exists = bookCrudRepository.existsById(id);
-        if (exists) {
+
+        boolean ifExists = bookCrudRepository.existsById(id);
+        if (ifExists) {
             bookCrudRepository.deleteById(id);
         }
-
-        return exists;
+        return ifExists;
     }
 }

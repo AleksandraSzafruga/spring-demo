@@ -1,5 +1,7 @@
 package pl.sda.javalondek4springdemo.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 @Entity(name = "books")
@@ -9,13 +11,10 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "imie")
+    @Column(name = "imię")
     private String name;
 
-    @Column
     private String surname;
-
     @Column(name = "tytuł")
     private String title;
 
@@ -27,22 +26,6 @@ public class Book {
     }
 
     public Book() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public Long getId() {
@@ -61,13 +44,29 @@ public class Book {
         this.title = title;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", surname='" + surname + '\'' +
-            ", title='" + title + '\'' +
-            '}';
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", title='" + title + '\'' +
+                '}';
     }
 }

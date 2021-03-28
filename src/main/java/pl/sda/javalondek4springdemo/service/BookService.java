@@ -32,9 +32,9 @@ public class BookService {
     public List<BookDto> findAllBooks() {
 
         var result = bookRepository.findAllBooks()
-            .stream()
-            .map(book -> bookMapper.fromEntityToDto(book))
-            .collect(toList());
+                .stream()
+                .map(book -> bookMapper.fromEntityToDto(book))
+                .collect(toList());
 
         logger.info("number of found books: [{}]", result.size());
         logger.debug("result: {}", result);
@@ -73,7 +73,7 @@ public class BookService {
         entityToSave.setId(currentMaxId + 1);
         bookRepository.findAllBooks().add(entityToSave);
 
-        logger.info("saved book: [{}]", entityToSave);
+        logger.info("saved book: [{}]", toSave);
 
         return bookMapper.fromEntityToDto(entityToSave);
     }
@@ -87,15 +87,14 @@ public class BookService {
     // Transactional
     public BookDto replaceBook(Long id, BookDto toReplace) {
         Book book = findBookByIdFromRepository(id);
-
         Book bookMapped = bookMapper.fromDtoToEntity(toReplace);
         bookMapped.setId(id);
         bookRepository.findAllBooks().removeIf(book1 -> book1.getId().equals(id));
         bookRepository.findAllBooks().add(bookMapped);
         logger.info("replacing book [{}] with new one [{}]", book, toReplace);
-
         return bookMapper.fromEntityToDto(bookMapped);
     }
+
 
     public BookDto updateBookWithAttributes(Long id, BookDto toUpdate) {
 
@@ -106,16 +105,15 @@ public class BookService {
         if (nonNull(bookEntityToUpdate.getName())) {
             book.setName(bookEntityToUpdate.getName());
         }
-
         if (nonNull(bookEntityToUpdate.getSurname())) {
             book.setSurname(bookEntityToUpdate.getSurname());
         }
 
-        if (nonNull(bookEntityToUpdate.getTitle())) {
+        if (nonNull(toUpdate.getTitle())) {
             book.setTitle(bookEntityToUpdate.getTitle());
         }
 
-        logger.info("updated book: [{}], with changes to apply: [{}]", book, bookEntityToUpdate);
+        logger.info("updated book: [{}], with changes to apply: [{}]", book, toUpdate);
         return bookMapper.fromEntityToDto(book);
     }
 }
